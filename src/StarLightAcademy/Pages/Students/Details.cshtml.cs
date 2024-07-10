@@ -16,7 +16,13 @@ public class DetailsModel(Data.StarLightAcademyContext context) : PageModel
             return NotFound();
         }
 
-        var student = await context.Students.FirstOrDefaultAsync(m => m.ID == id);
+        var student = await context.Students
+            .Include(s => s.Rank)
+            .Include(s => s.Enrollments)
+            .ThenInclude(e => e.Course)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(m => m.ID == id);
+
         if (student == null)
         {
             return NotFound();
