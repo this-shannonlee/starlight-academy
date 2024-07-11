@@ -24,9 +24,38 @@ public class CreateModel(Data.StarLightAcademyContext context) : PageModel
             return Page();
         }
 
-        context.Students.Add(Student);
-        await context.SaveChangesAsync();
+        //context.Students.Add(Student);
+        //await context.SaveChangesAsync();
 
-        return RedirectToPage("./Index");
+        //return RedirectToPage("./Index");
+
+        //var emptyStudent = new Student();
+
+        //if (await TryUpdateModelAsync<Student>(
+        //    emptyStudent,
+        //    "student",   // Prefix for form value.
+        //    s => s.FirstName, s => s.LastName, s => s.EnrollmentDate))
+        //{
+        //    _context.Students.Add(emptyStudent);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToPage("./Index");
+        //}
+        Student newStudent = new()
+        {
+            Rank = Student.Rank,
+            LastName = Student.LastName,
+            FirstName = Student.FirstName,
+            Species = Student.Species,
+            DOB = Student.DOB,
+        };
+
+        if (await TryUpdateModelAsync<Student>(newStudent))
+        {
+            context.Students.Add(newStudent);
+            await context.SaveChangesAsync();
+            return RedirectToPage("./Index");
+        }
+
+        return Page();
     }
 }
