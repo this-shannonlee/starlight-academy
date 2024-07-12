@@ -1,26 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StarLightAcademy.Models;
 
-public class Student
+public class Student : StudentInput
 {
-    public int ID { get; set; }
-
-    public int RankID { get; set; }
-
-    public Rank? Rank { get; set; }
-
-    [Required, Display(Name = "Last Name")]
-    public required string LastName { get; set; }
-
-    [Required, Display(Name = "First Name")]
-    public required string FirstName { get; set; }
-
-    [Required]
-    public required string Species { get; set; }
-
-    [Display(Name = "Birth Date"), DisplayFormat(DataFormatString = "{0:D}", ApplyFormatInEditMode = true)]
-    public DateTime DOB { get; set; }
-
-    public List<Enrollment> Enrollments { get; set; } = [];
+    [Column(TypeName = "decimal(4, 3)"), DisplayFormat(DataFormatString = "{0:0.00}")]
+    public decimal GPA { get; set; }
 }
