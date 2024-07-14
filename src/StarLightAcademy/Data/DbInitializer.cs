@@ -64,7 +64,7 @@ public static class DbInitializer
                 LastName = "La Forge",
                 RankID = 350,
                 Species = "Human",
-                DOB = new DateOnly(2035,02,16),
+                DOB = new DateOnly(2335,02,16),
                 GPA = 2.875m
             },
             new() // ID = 5
