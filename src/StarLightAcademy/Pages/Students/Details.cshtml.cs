@@ -5,7 +5,7 @@ using StarLightAcademy.Models;
 
 namespace StarLightAcademy.Pages.Students;
 
-public class DetailsModel(Data.StarLightAcademyContext context) : PageModel
+public class DetailsModel(StarLightAcademy.Data.StarLightAcademyContext context) : PageModel
 {
     public Student Student { get; set; } = default!;
 

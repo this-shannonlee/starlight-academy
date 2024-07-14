@@ -5,7 +5,7 @@ using StarLightAcademy.Models;
 
 namespace StarLightAcademy.Pages.Students;
 
-public class DeleteModel(Data.StarLightAcademyContext context) : PageModel
+public class DeleteModel(StarLightAcademy.Data.StarLightAcademyContext context) : PageModel
 {
     [BindProperty]
     public Student Student { get; set; } = default!;

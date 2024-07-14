@@ -26,12 +26,11 @@ public class StudentInput
     public List<Enrollment> Enrollments { get; set; } = [];
 
 
-    public Student ToStudent()
+    public Student CreateStudent()
     {
         return new Student
         {
-            ID = this.ID,
-            //RankID = this.RankID,
+            RankID = this.RankID,
             Rank = this.Rank,
             LastName = this.LastName,
             FirstName = this.FirstName,

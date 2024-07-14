@@ -9,7 +9,7 @@ namespace StarLightAcademy.Pages.Students;
 public class EditModel(Data.StarLightAcademyContext context) : PageModel
 {
     [BindProperty]
-    public Student Student { get; set; } = default!;
+    public StudentInput Student { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -30,25 +30,34 @@ public class EditModel(Data.StarLightAcademyContext context) : PageModel
 
     // To protect from overposting attacks, enable the specific properties you want to bind to.
     // For more details, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(int id)
     {
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        context.Attach(Student).State = EntityState.Modified;
+        //var studentToUpdate = await context.Students.FindAsync(id);
+        var studentToUpdate = await context.Students.FirstOrDefaultAsync(m => m.ID == id);
+
+        if (studentToUpdate == null)
+        {
+            return NotFound();
+        }
 
         try
         {
+            studentToUpdate.CurrentValues.SetValues(StudentVM);
             await context.SaveChangesAsync();
+            return RedirectToPage("./Index");
+        }
         }
         catch (DbUpdateConcurrencyException)
         {
             if (!StudentExists(Student.ID))
             {
                 return NotFound();
-            }
+}
             else
             {
                 throw;
@@ -59,7 +68,7 @@ public class EditModel(Data.StarLightAcademyContext context) : PageModel
     }
 
     private bool StudentExists(int id)
-    {
-        return context.Students.Any(e => e.ID == id);
-    }
+{
+    return context.Students.Any(e => e.ID == id);
+}
 }

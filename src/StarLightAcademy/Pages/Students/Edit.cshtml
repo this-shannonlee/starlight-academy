@@ -15,9 +15,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Student.ID" />
             <div class="form-group">
-                <label asp-for="Student.Rank" class="control-label"></label>
-                <select asp-for="Student.Rank" class="form-control" asp-items="ViewBag.RankID"></select>
-                <span asp-validation-for="Student.Rank" class="text-danger"></span>
+                <label asp-for="Student.RankID" class="control-label"></label>
+                <select asp-for="Student.RankID" class="form-control" asp-items="ViewBag.RankID"></select>
+                <span asp-validation-for="Student.RankID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Student.LastName" class="control-label"></label>
@@ -51,5 +51,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
