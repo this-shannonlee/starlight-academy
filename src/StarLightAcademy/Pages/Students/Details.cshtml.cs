@@ -5,7 +5,7 @@ using StarLightAcademy.Models;
 
 namespace StarLightAcademy.Pages.Students;
 
-public class DetailsModel(Data.StarLightAcademyContext context) : PageModel
+public class DetailsModel(StarLightAcademy.Data.StarLightAcademyContext context) : PageModel
 {
     public Student Student { get; set; } = default!;
 
@@ -16,7 +16,13 @@ public class DetailsModel(Data.StarLightAcademyContext context) : PageModel
             return NotFound();
         }
 
-        var student = await context.Students.FirstOrDefaultAsync(m => m.ID == id);
+        var student = await context.Students
+            .AsNoTracking()
+            .Include(s => s.Rank)
+            .Include(s => s.Enrollments)
+            .ThenInclude(e => e.Course)
+            .FirstOrDefaultAsync(s => s.ID == id);
+
         if (student == null)
         {
             return NotFound();

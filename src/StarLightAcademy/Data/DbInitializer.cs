@@ -37,7 +37,8 @@ public static class DbInitializer
                 LastName = "Picard",
                 RankID = 200,
                 Species = "Human",
-                DOB = new DateTime(2305,07,13,0,0,0,DateTimeKind.Utc)
+                DOB = new DateOnly(2305,07,13),
+                GPA = 3.33m
             },
             new() // ID = 2
             {
@@ -45,7 +46,8 @@ public static class DbInitializer
                 LastName = "Riker",
                 RankID = 230,
                 Species = "Human",
-                DOB = new DateTime(2335,08,19,0,0,0,DateTimeKind.Utc)
+                DOB = new DateOnly(2335,08,19),
+                GPA = 4.00m
             },
             new() // ID = 3
             {
@@ -53,7 +55,8 @@ public static class DbInitializer
                 LastName = "Data",
                 RankID = 250,
                 Species="Android",
-                DOB = new DateTime(2338,02,02,0,0,0,DateTimeKind.Utc)
+                DOB = new DateOnly(2338,02,02),
+                GPA = 4.00m
             },
             new() // ID = 4
             {
@@ -61,7 +64,8 @@ public static class DbInitializer
                 LastName = "La Forge",
                 RankID = 350,
                 Species = "Human",
-                DOB = new DateTime(2035,02,16,0,0,0,DateTimeKind.Utc)
+                DOB = new DateOnly(2035,02,16),
+                GPA = 2.875m
             },
             new() // ID = 5
             {
@@ -69,7 +73,8 @@ public static class DbInitializer
                 LastName = "Troi",
                 RankID = 250,
                 Species = "Betazoid / Human",
-                DOB = new DateTime(2335,03,29,0,0,0,DateTimeKind.Utc)
+                DOB = new DateOnly(2335,03,29),
+                GPA = 3.4m
             },
             new() // ID = 6
             {
@@ -77,7 +82,8 @@ public static class DbInitializer
                 LastName = "Son of Mogh",
                 RankID = 350,
                 Species = "Klingon",
-                DOB = new DateTime(2340,01,01,0,0,0,DateTimeKind.Utc)
+                DOB = new DateOnly(2340,01,01),
+                GPA = 0.0m
             },
             new() // ID = 7
             {
@@ -85,7 +91,8 @@ public static class DbInitializer
                 LastName = "Crusher",
                 RankID = 800,
                 Species = "Human",
-                DOB = new DateTime(2324,10,13,0,0,0,DateTimeKind.Utc)
+                DOB = new DateOnly(2324,10,13),
+                GPA = 3.0m
             }
         ];
 
@@ -100,14 +107,15 @@ public static class DbInitializer
             new Course { ID = 1363, Title = "Andriod Legal Rights", Credits = 3 },
             new Course { ID = 1370, Title = "Becoming a Federation Ambassador", Credits = 3 },
             new Course { ID = 1829, Title = "Interpreting Pyschology as an Empath", Credits = 3 },
-            new Course { ID = 1929, Title = "Exploring the Borg Hive Mind", Credits = 3 },
             new Course { ID = 1912, Title = "Q Continuum Relations", Credits = 3 },
+            new Course { ID = 1929, Title = "Exploring the Borg Hive Mind", Credits = 3 },
+            new Course { ID = 3217, Title = "Introduction to Exobiology", Credits = 3 },
             new Course { ID = 4041, Title = "Antimatter Containment ", Credits = 5 },
-            new Course { ID = 3845, Title = "Positronic  Brain Theories", Credits = 4 },
-            new Course { ID = 3141, Title = "Advanced Planetary Defense", Credits = 4 },
-            new Course { ID = 3185, Title = "Advanced Tactical Strategies", Credits = 3 },
-            new Course { ID = 2042, Title = "Working with Nanites", Credits = 4 },
-            new Course { ID = 2870, Title = "Barclay's Protomorphosis Syndrome ", Credits = 3 }
+            new Course { ID = 4141, Title = "Advanced Planetary Defense", Credits = 3 },
+            new Course { ID = 4185, Title = "Advanced Tactical Strategies", Credits = 3 },
+            new Course { ID = 8042, Title = "Working with Nanites", Credits = 4 },
+            new Course { ID = 8870, Title = "Barclay's Protomorphosis Syndrome ", Credits = 3 },
+            new Course { ID = 8845, Title = "Positronic  Brain Theories", Credits = 4 },
         ];
 
         context.Courses.AddRange(courses);
@@ -115,23 +123,25 @@ public static class DbInitializer
 
         List<Enrollment> enrollments =
         [
-            new Enrollment { StudentID = 1, CourseID = 3185, Grade = Grade.A },
+            new Enrollment { StudentID = 1, CourseID = 4185, Grade = Grade.A },
             new Enrollment { StudentID = 1, CourseID = 1929, Grade = Grade.B },
             new Enrollment { StudentID = 1, CourseID = 1912, Grade = Grade.B },
-            new Enrollment { StudentID = 2, CourseID = 3185, Grade = Grade.A },
+            new Enrollment { StudentID = 2, CourseID = 4185, Grade = Grade.A },
             new Enrollment { StudentID = 2, CourseID = 1100 },
             new Enrollment { StudentID = 2, CourseID = 1080, Grade = Grade.A },
             new Enrollment { StudentID = 3, CourseID = 1050, Grade = Grade.A },
-            new Enrollment { StudentID = 3, CourseID = 3845 },
+            new Enrollment { StudentID = 3, CourseID = 3217, Grade = Grade.A },
+            new Enrollment { StudentID = 3, CourseID = 8845 },
             new Enrollment { StudentID = 3, CourseID = 1363 },
-            new Enrollment { StudentID = 4, CourseID = 4041 },
-            new Enrollment { StudentID = 4, CourseID = 3141, Grade = Grade.F },
-            new Enrollment { StudentID = 5, CourseID = 1829, Grade = Grade.C },
+            new Enrollment { StudentID = 4, CourseID = 4041, Grade = Grade.A },
+            new Enrollment { StudentID = 4, CourseID = 4141, Grade = Grade.D },
+            new Enrollment { StudentID = 5, CourseID = 1829, Grade = Grade.B },
             new Enrollment { StudentID = 5, CourseID = 1050, Grade = Grade.A },
             new Enrollment { StudentID = 6, CourseID = 1050, Grade = Grade.F },
             new Enrollment { StudentID = 6, CourseID = 1370 },
-            new Enrollment { StudentID = 7, CourseID = 2042, Grade = Grade.A },
-            new Enrollment { StudentID = 7, CourseID = 2870, Grade = Grade.D },
+            new Enrollment { StudentID = 7, CourseID = 1100, Grade = Grade.A },
+            new Enrollment { StudentID = 7, CourseID = 8042, Grade = Grade.A },
+            new Enrollment { StudentID = 7, CourseID = 8870, Grade = Grade.D },
         ];
 
         context.Enrollments.AddRange(enrollments);

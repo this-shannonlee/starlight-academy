@@ -5,16 +5,16 @@ using StarLightAcademy.Models;
 
 namespace StarLightAcademy.Pages.Students;
 
-public class CreateModel(Data.StarLightAcademyContext context) : PageModel
+public class CreateModel(StarLightAcademy.Data.StarLightAcademyContext context) : PageModel
 {
     public IActionResult OnGet()
     {
-        ViewData["Rank"] = new SelectList(context.Ranks, "ID", "Title");
+        ViewData["RankID"] = new SelectList(context.Ranks, "ID", "Title");
         return Page();
     }
 
     [BindProperty]
-    public Student Student { get; set; } = default!;
+    public StudentInput Student { get; set; } = default!;
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
@@ -24,7 +24,9 @@ public class CreateModel(Data.StarLightAcademyContext context) : PageModel
             return Page();
         }
 
-        context.Students.Add(Student);
+        Student newStudent = Student.Create();
+
+        context.Students.Add(newStudent);
         await context.SaveChangesAsync();
 
         return RedirectToPage("./Index");

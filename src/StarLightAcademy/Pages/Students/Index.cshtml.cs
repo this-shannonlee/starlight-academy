@@ -4,13 +4,13 @@ using StarLightAcademy.Models;
 
 namespace StarLightAcademy.Pages.Students;
 
-public class IndexModel(Data.StarLightAcademyContext context) : PageModel
+public class IndexModel(StarLightAcademy.Data.StarLightAcademyContext context) : PageModel
 {
-    public IList<Student> Students { get; set; } = default!;
+    public IList<Student> Student { get; set; } = default!;
 
     public async Task OnGetAsync()
     {
-        Students = await context.Students
+        Student = await context.Students
             .Include(s => s.Rank).ToListAsync();
     }
 }

@@ -11,4 +11,6 @@ public class Rank
     [Required]
     public required string Title { get; set; }
 
+    public List<Student> Students { get; set; } = [];
+
 }
