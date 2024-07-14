@@ -24,7 +24,7 @@ public class CreateModel(StarLightAcademy.Data.StarLightAcademyContext context) 
             return Page();
         }
 
-        Student newStudent = Student.CreateStudent();
+        Student newStudent = Student.Create();
 
         context.Students.Add(newStudent);
         await context.SaveChangesAsync();

@@ -37,7 +37,6 @@ public class EditModel(Data.StarLightAcademyContext context) : PageModel
             return Page();
         }
 
-        //var studentToUpdate = await context.Students.FindAsync(id);
         var studentToUpdate = await context.Students.FirstOrDefaultAsync(m => m.ID == id);
 
         if (studentToUpdate == null)
@@ -47,28 +46,27 @@ public class EditModel(Data.StarLightAcademyContext context) : PageModel
 
         try
         {
-            studentToUpdate.CurrentValues.SetValues(StudentVM);
+            studentToUpdate = Student.Update(studentToUpdate);
+            //context.Students.Update(studentToUpdate);
             await context.SaveChangesAsync();
             return RedirectToPage("./Index");
-        }
         }
         catch (DbUpdateConcurrencyException)
         {
             if (!StudentExists(Student.ID))
             {
                 return NotFound();
-}
+            }
             else
             {
                 throw;
             }
         }
 
-        return RedirectToPage("./Index");
     }
 
     private bool StudentExists(int id)
-{
-    return context.Students.Any(e => e.ID == id);
-}
+    {
+        return context.Students.Any(e => e.ID == id);
+    }
 }

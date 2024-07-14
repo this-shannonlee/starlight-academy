@@ -26,17 +26,29 @@ public class StudentInput
     public List<Enrollment> Enrollments { get; set; } = [];
 
 
-    public Student CreateStudent()
+    public Student Create()
     {
         return new Student
         {
-            RankID = this.RankID,
-            Rank = this.Rank,
-            LastName = this.LastName,
-            FirstName = this.FirstName,
-            Species = this.Species,
-            DOB = this.DOB,
-            Enrollments = this.Enrollments,
+            RankID = RankID,
+            Rank = Rank,
+            LastName = LastName,
+            FirstName = FirstName,
+            Species = Species,
+            DOB = DOB,
+            Enrollments = Enrollments,
         };
+    }
+
+    public Student Update(Student current)
+    {
+        current.RankID = RankID;
+        current.Rank = Rank;
+        current.LastName = LastName;
+        current.FirstName = FirstName;
+        current.Species = Species;
+        current.DOB = DOB;
+        current.Enrollments = Enrollments;
+        return current;
     }
 }

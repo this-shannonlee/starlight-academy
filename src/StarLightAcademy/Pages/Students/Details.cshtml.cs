@@ -17,11 +17,11 @@ public class DetailsModel(StarLightAcademy.Data.StarLightAcademyContext context)
         }
 
         var student = await context.Students
+            .AsNoTracking()
             .Include(s => s.Rank)
             .Include(s => s.Enrollments)
             .ThenInclude(e => e.Course)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(m => m.ID == id);
+            .FirstOrDefaultAsync(s => s.ID == id);
 
         if (student == null)
         {
