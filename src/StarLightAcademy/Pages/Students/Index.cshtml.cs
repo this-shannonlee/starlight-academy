@@ -4,18 +4,28 @@ using StarLightAcademy.Models;
 
 namespace StarLightAcademy.Pages.Students;
 
-public class IndexModel(StarLightAcademy.Data.StarLightAcademyContext context) : PageModel
+public class IndexModel(StarLightAcademy.Data.StarLightAcademyContext context, IConfiguration configuration) : PageModel
 {
-    public IList<Student> Students { get; set; } = default!;
+    public PaginatedList<Student> Students { get; set; } = default!;
     public string? NameSort { get; set; }
     public string? DateSort { get; set; }
     public string? CurrentFilter { get; set; }
     public string? CurrentSort { get; set; }
 
-    public async Task OnGetAsync(string sortOrder, string searchString)
+    public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
     {
+        CurrentSort = sortOrder;
         NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
         DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+        if (searchString != null)
+        {
+            pageIndex = 1;
+        }
+        else
+        {
+            searchString = currentFilter;
+        }
+
 
         CurrentFilter = searchString;
 
@@ -34,10 +44,8 @@ public class IndexModel(StarLightAcademy.Data.StarLightAcademyContext context) :
             _ => studentsIQ.OrderBy(s => s.LastName),
         };
 
-        Students = await studentsIQ
-            .AsNoTracking()
-            .Include(s => s.Rank)
-            .ToListAsync();
-
+        var pageSize = configuration.GetValue("PageSize", 4);
+        Students = await PaginatedList<Student>.CreateAsync(
+            studentsIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
     }
 }
